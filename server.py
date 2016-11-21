@@ -1,7 +1,13 @@
 from flask import *
 from gopigo import *
-
+from camera import Camera
 state = ""
+
+def gen(camera):
+    while True:
+        frame = camera.get_frame()
+        yield (b"--frame\r\n"
+               b"Content-Type: image/jpeg\r\n\r")
 
 app = Flask(__name__)
 @app.route("/js/<path:path>")
@@ -12,10 +18,14 @@ def js(path, state=state):
 def homepage(state=state):
     return render_template("ui.html")
 
+@app.route("/video_feed")
+def video():
+    return Response(gen(Camera()), mimetype="multipart/x-mixed-replace; boundary=frame")
+
 @app.route("/left")
 def leftRoute(state=state):
     if state == "left":
-	return
+        return
     state = "left"
     left_rot()
     return "Moving Left"
@@ -23,7 +33,7 @@ def leftRoute(state=state):
 @app.route("/right")
 def rightRoute(state=state):
     if state == "right":
-	return
+        return
     state = "right"
     right_rot()
     return "Moving Right"
@@ -31,7 +41,7 @@ def rightRoute(state=state):
 @app.route("/bwd")
 def bwdRoute(state=state):
     if state == "bwd":
-	return
+        return
     state = "bwd"
     bwd()
     return "Moving Back"
@@ -39,7 +49,7 @@ def bwdRoute(state=state):
 @app.route("/fwd")
 def fwdRoute(state=state):
     if state == "fwd":
-	return
+        return
     state = "fwd"
     fwd()
     return "Moving forward"
