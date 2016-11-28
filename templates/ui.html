@@ -5,16 +5,12 @@
     <title>Haramb-E</title>
       </head>
   <body>
-    <iframe src="//192.168.43.114:8080/video_feed">
+    <iframe src="//192.168.43.114:8080/video_feed" height=240 width=320>
     </iframe>
     <h1>Haramb-E Project!</h1>
     <script
       src="/js/jq.min.js"></script>
     <script type="text/javascript">
-    function httpGet(theUrl){
-
-          return xmlHttp.responseText;
-    }
     $(document).ready(function () {
       $('body').on('keydown keyup',function(e){
         var pressed = e.type=="keydown" ? 1 : 0 ;

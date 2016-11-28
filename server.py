@@ -1,13 +1,6 @@
 from flask import *
 from gopigo import *
-from camera import Camera
 state = ""
-
-def gen(camera):
-    while True:
-        frame = camera.get_frame()
-        yield (b"--frame\r\n"
-               b"Content-Type: image/jpeg\r\n\r\n" + frame + b'\r\n')
 
 app = Flask(__name__)
 @app.route("/js/<path:path>")
@@ -17,10 +10,6 @@ def js(path, state=state):
 @app.route("/")
 def homepage(state=state):
     return render_template("ui.html")
-
-@app.route("/video_feed")
-def video():
-    return Response(gen(Camera()), mimetype="multipart/x-mixed-replace; boundary=frame")
 
 @app.route("/left")
 def leftRoute(state=state):
