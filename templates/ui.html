@@ -5,7 +5,8 @@
     <title>Haramb-E</title>
       </head>
   <body>
-    <img src="{{ url_for('video') }}">
+    <iframe src="//192.168.43.114:8080/video_feed">
+    </iframe>
     <h1>Haramb-E Project!</h1>
     <script
       src="/js/jq.min.js"></script>
@@ -34,7 +35,7 @@
 	    type: "GET",
 	    url:"/"+dir,
 	    success: function(data) {
-                console.log(data)
+                console.log("success: " + data)
             }
  	  })
         }
