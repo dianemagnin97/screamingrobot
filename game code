@@ -1,0 +1,23 @@
+@app.route("/screamingrobot")
+def screaming_robot(state=state):
+    #check if space in front of it is empty
+        #if empty, go towards empty space
+        #if space not empty (but not surrounded) set off "search space with counter"
+            #turn 90* to find empty space, beep once (counter +1)
+                #if empty, go towards it (counter 0, exit loop)
+                #if not empty, turn 90 (counter +1, now 2)
+                    #...
+                    #if counter reaches 4 --> state = "surrounded"
+                    #SCREAM
+
+def check_state():
+  check space in front
+    if space in front is empty
+        state = "free"
+        return 
+    if space not empty
+        state = "blocked"
+        stop()
+        beep
+    if state = surrounded
+        
