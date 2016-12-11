@@ -142,7 +142,7 @@ def check_spacial(spacial_state=spacial_state):
   		#beep        
     #if state = surrounded
 
- def check_lighting(light_state=light_state):
+def check_lighting(light_state=light_state):
  	if GPIO.input(lightPin):
  		light_state = "light"
  	else:
