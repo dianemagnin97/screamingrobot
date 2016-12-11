@@ -57,6 +57,7 @@ rot_t = Timer(2, turnoff_rot_timer)
 @app.route("/screamingrobot")
 def screaming_robot(state=state):
 	while timer = "on":
+		servo(70)
 		check_overall()
 		check_lighting()
 		check_sound()
@@ -133,6 +134,12 @@ def check_spacial(spacial_state=spacial_state):
 		bwd()
 		time.sleep(1)
 		stop()
+		servo(28)
+		time.sleep(1)
+		servo(112)
+		time.sleep(1)
+		servo(70)
+		time.sleep(1)
 		#counter = 1
   		#beep        
     #if state = surrounded
@@ -149,7 +156,8 @@ def check_spacial(spacial_state=spacial_state):
  		set_speed(150)
 
 def check_sound(Sound_state=sound_state):
-	if GPIO.input(soundPin) > 100:
+	print "sound level" + string(GPIO.input(soundPin))
+	if GPIO.input(soundPin) > 150:
 		sound_state = "loud"
 		GPIO.output(BuzzPin, GPIO.HIGH)
  		screaming_state = True
@@ -161,6 +169,7 @@ def check_sound(Sound_state=sound_state):
 
 def check_overall(overall_state= overall_state):
 	if spacial_state = "free" and light_state = "light" and sound_state = "quiet":
+		print "I have a bad feeling about this"
 		GPIO.output(BuzzPin, GPIO.LOW)
 		screaming_state = False
 
