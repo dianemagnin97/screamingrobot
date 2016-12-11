@@ -125,7 +125,6 @@ def screaming_robot(state=state):
 def check_spacial(spacial_state=spacial_state):
 	if GPIO.input(vibePin) = False:
 		spacial_state = "free"
-		return
 		fwd()
 		stress = 0
 	else:
@@ -134,7 +133,6 @@ def check_spacial(spacial_state=spacial_state):
 		bwd()
 		time.sleep(1)
 		stop()
-		return
 		#counter = 1
   		#beep        
     #if state = surrounded
@@ -142,7 +140,6 @@ def check_spacial(spacial_state=spacial_state):
  def check_lighting(light_state=light_state):
  	if GPIO.input(lightPin):
  		light_state = "light"
- 		return
  	else:
  		light_state = "dark"	
  		GPIO.output(BuzzPin, GPIO.HIGH)
@@ -150,7 +147,6 @@ def check_spacial(spacial_state=spacial_state):
  		set_speed(255)
  		time.sleep(5)
  		set_speed(150)
- 		return
 
 def check_sound(Sound_state=sound_state):
 	if GPIO.input(soundPin) > 100:
@@ -160,16 +156,13 @@ def check_sound(Sound_state=sound_state):
  		set_speed(255)
  		time.sleep(5)
  		set_speed(150)
- 		return
 	else:
 		sound_state = "quiet"	
-		return
 
 def check_overall(overall_state= overall_state):
 	if spacial_state = "free" and light_state = "light" and sound_state = "quiet":
 		GPIO.output(BuzzPin, GPIO.LOW)
 		screaming_state = False
-		return
 
 def end():
 	GPIO.cleanup()
