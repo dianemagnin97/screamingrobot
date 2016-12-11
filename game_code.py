@@ -6,26 +6,26 @@
 #research GPIO library (pins input output) to see if we can return input value instrad of HIGH (true) or LOW (false) (see online maybe?)
 
 
-
+from gopigo import *
 #setup
 from threading import Timer
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 #setup pins
-vibePin = I2C
-SoundPin = A1
-BuzzPin = D11
+vibePin = 15
+#SoundPin = serial
+BuzzPin = 10
 #lightPin = I2C
 
 #serial vibration
 GPIO.setup(vibePin, GPIO.IN)
 #a1 sound
-GPIO.setup(SoundPin, GPIO.IN)
+#GPIO.setup(SoundPin, GPIO.IN)
 #D11 buzzer 
 GPIO.setup(BuzzPin, GPIO.OUT)
 #l2c light
-GPIO.setup(lightPin, GPIO.IN)
+#GPIO.setup(lightPin, GPIO.IN)
 
 spacial_state = ""
 sound_state = ""
@@ -42,7 +42,7 @@ stress = 0
 
 #set to shut off after 3 minutes
 timer = "off"
-t = Timer(180, end)
+t = Timer(180, end())
 t.start()
 timer = "on"
 
@@ -57,8 +57,8 @@ def screaming_robot(state=state):
 	while timer == "on":
 		servo(70)
 		check_overall()
-		check_lighting()
-		check_sound()
+		#check_lighting()
+		#check_sound()
 		check_spacial()
 		#if blocked
 		if spacial_state == "blocked":
@@ -142,31 +142,31 @@ def check_spacial(spacial_state=spacial_state):
   		#beep        
     #if state = surrounded
 
-def check_lighting(light_state=light_state):
- 	if GPIO.input(lightPin):
- 		light_state = "light"
- 	else:
- 		light_state = "dark"	
- 		GPIO.output(BuzzPin, GPIO.HIGH)
- 		screaming_state = True
- 		set_speed(255)
- 		time.sleep(5)
- 		set_speed(150)
-
-def check_sound(Sound_state=sound_state):
-	print "sound level" + string(GPIO.input(soundPin))
-	if GPIO.input(soundPin) > 150:
-		sound_state = "loud"
-		GPIO.output(BuzzPin, GPIO.HIGH)
- 		screaming_state = True
- 		set_speed(255)
- 		time.sleep(5)
- 		set_speed(150)
-	else:
-		sound_state = "quiet"	
-
+#def check_lighting(light_state=light_state):
+ #	if GPIO.input(lightPin):
+ #		light_state = "light"
+ #	else:
+ #		light_state = "dark"	
+ #		GPIO.output(BuzzPin, GPIO.HIGH)
+ #		screaming_state = True
+ #		set_speed(255)
+ #		time.sleep(5)
+ #		set_speed(150)
+#
+#def check_sound(Sound_state=sound_state):
+##	print "sound level" + string(GPIO.input(soundPin))
+#	if GPIO.input(soundPin) > 150:
+#		sound_state = "loud"
+#		GPIO.output(BuzzPin, GPIO.HIGH)
+ #		screaming_state = True
+ #		set_speed(255)
+ #		time.sleep(5)
+ #		set_speed(150)
+#	else:
+#		sound_state = "quiet"	
+#
 def check_overall(overall_state= overall_state):
-	if spacial_state == "free" and light_state == "light" and sound_state == "quiet":
+	if spacial_state == "free":# and light_state == "light" and sound_state == "quiet":
 		print "I have a bad feeling about this"
 		GPIO.output(BuzzPin, GPIO.LOW)
 		screaming_state = False
