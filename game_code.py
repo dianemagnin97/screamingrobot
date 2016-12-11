@@ -54,7 +54,7 @@ def turnoff_rot_timer():
 rot_t = Timer(2, turnoff_rot_timer)
 
 
-@app.route("/screamingrobot"):
+@app.route("/screamingrobot")
 def screaming_robot(state=state):
 	while timer = "on":
 		check_overall()
