@@ -173,6 +173,5 @@ def check_overall(overall_state= overall_state):
 
 def end():
 	GPIO.cleanup()
-	break
 
 screaming_robot()
