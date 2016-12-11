@@ -17,7 +17,7 @@ GPIO.setmode(GPIO.BCM)
 vibePin = Serial
 SoundPin = A1
 BuzzPin = D11
-lightPin = l2C
+lightPin = I2C
 
 #serial vibration
 GPIO.setup(vibePin, GPIO.IN)
@@ -48,13 +48,15 @@ t.start()
 timer = "on"
 
 #rotation time
-def turnoff_rot_timer()
+def turnoff_rot_timer():
 	rot_timer = "off"
 
 rot_t = Timer(2, turnoff_rot_timer)
 
 
 @app.route("/screamingrobot):
+screaming_robot()
+
 def screaming_robot(state=state):
 	while time = "on":
 		check_overall()
@@ -63,6 +65,7 @@ def screaming_robot(state=state):
 		check_spacial()
 		#if blocked
 		if spacial_state = "blocked":
+			print "I'm blocked! AAAAAAAAAHHHHHH!"
 			GPIO.output(BuzzPin, GPIO.HIGH)
 			screaming_state = True
 		        time.sleep(1)
