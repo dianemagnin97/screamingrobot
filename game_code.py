@@ -8,7 +8,6 @@
 
 
 #setup
-include time
 from threading import Timer
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
@@ -54,7 +53,6 @@ def turnoff_rot_timer():
 rot_t = Timer(2, turnoff_rot_timer)
 
 
-@app.route("/screamingrobot")
 def screaming_robot(state=state):
 	while timer = "on":
 		servo(70)
@@ -176,3 +174,5 @@ def check_overall(overall_state= overall_state):
 def end():
 	GPIO.cleanup()
 	break
+
+screaming_robot()
