@@ -8,6 +8,7 @@
 
 from gopigo import *
 #setup
+import time
 from threading import Timer
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
@@ -30,7 +31,7 @@ GPIO.setup(BuzzPin, GPIO.OUT)
 spacial_state = ""
 sound_state = ""
 light_state = ""
-set_speed(150) #between 0-255
+#set_speed(150) #between 0-255
 screaming_state = False
 
 #GPIO.output(D11, GPIO.HIGH) #loud screens
@@ -41,8 +42,12 @@ screaming_state = False
 stress = 0
 
 #set to shut off after 3 minutes
+def end():
+	timer = "off"
+	GPIO.cleanup()
+
 timer = "off"
-t = Timer(180, end())
+t = Timer(180.0, end)
 t.start()
 timer = "on"
 
@@ -70,26 +75,26 @@ def screaming_robot(state=state):
 			rot_t.start()
 			#rotate for 2 seconds
 			while rot_timer == "on":
-				right_rot()							
-		        time.sleep(1)
-		        GPIO.output(BuzzPin, GPIO.LOW)
-			#check if blocked again
+				right_rot()
+            time.sleep(1)
+            GPIO.output(BuzzPin, GPIO.LOW)
+    #check if blocked again
 			check_spacial()
 			if spacial_state == "blocked":
-			        GPIO.output(BuzzPin, GPIO.HIGH)
-			        screaming_state = True		
+			    GPIO.output(BuzzPin, GPIO.HIGH)
+			    screaming_state = True
 				stress = 2
 				rot_timer = "on"
 				rot_t.start()
 			#rotate for 2 seconds
 				while rot_timer == "on":
 					right_rot()
-		                time.sleep(2)
-		                GPIO.output(BuzzPin, GPIO.LOW)	
+		        time.sleep(2)
+		        GPIO.output(BuzzPin, GPIO.LOW)
 				check_spacial()	
 				if spacial_state == "blocked":
-				        GPIO.output(BuzzPin, GPIO.HIGH)
-			                screaming_state = True		                        	
+				    GPIO.output(BuzzPin, GPIO.HIGH)
+			        screaming_state = True
 					stress = 3
 					rot_timer = "on"
 					rot_t.start()
@@ -97,7 +102,7 @@ def screaming_robot(state=state):
 					while rot_timer == "on":
 						right_rot()
 					time.sleep(4)
-		                        GPIO.output(BuzzPin, GPIO.LOW)
+                    GPIO.output(BuzzPin, GPIO.LOW)
 					check_spacial()	
 					if spacial_state == "blocked":
 						stress = 4
@@ -111,7 +116,7 @@ def screaming_robot(state=state):
 
 
 
-    #check if space in front of it is empty
+#check if space in front of it is empty
         #if empty, go towards empty space
         #if space not empty (but not surrounded) set off "search space with counter"
             #turn 90* to find empty space, beep once (counter 1)
@@ -122,6 +127,7 @@ def screaming_robot(state=state):
                     #SCREAM for 10 seconds
 
 def check_spacial(spacial_state=spacial_state):
+	# type: (object) -> object
 	if GPIO.input(vibePin) == False:
 		spacial_state = "free"
 		fwd()
@@ -170,8 +176,5 @@ def check_overall(overall_state= overall_state):
 		print "I have a bad feeling about this"
 		GPIO.output(BuzzPin, GPIO.LOW)
 		screaming_state = False
-
-def end():
-	GPIO.cleanup()
 
 screaming_robot()
