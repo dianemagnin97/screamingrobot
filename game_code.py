@@ -13,10 +13,10 @@ import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 
 #setup pins
-vibePin = Serial
+vibePin = I2C
 SoundPin = A1
 BuzzPin = D11
-lightPin = I2C
+#lightPin = I2C
 
 #serial vibration
 GPIO.setup(vibePin, GPIO.IN)
