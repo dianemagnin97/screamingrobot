@@ -54,14 +54,14 @@ rot_t = Timer(2, turnoff_rot_timer)
 
 
 def screaming_robot(state=state):
-	while timer = "on":
+	while timer == "on":
 		servo(70)
 		check_overall()
 		check_lighting()
 		check_sound()
 		check_spacial()
 		#if blocked
-		if spacial_state = "blocked":
+		if spacial_state == "blocked":
 			print "I'm blocked! AAAAAAAAAHHHHHH!"
 			GPIO.output(BuzzPin, GPIO.HIGH)
 			screaming_state = True
@@ -75,7 +75,7 @@ def screaming_robot(state=state):
 		        GPIO.output(BuzzPin, GPIO.LOW)
 			#check if blocked again
 			check_spacial()
-			if spacial_state = "blocked":
+			if spacial_state == "blocked":
 			        GPIO.output(BuzzPin, GPIO.HIGH)
 			        screaming_state = True		
 				stress = 2
@@ -87,7 +87,7 @@ def screaming_robot(state=state):
 		                time.sleep(2)
 		                GPIO.output(BuzzPin, GPIO.LOW)	
 				check_spacial()	
-				if spacial_state = "blocked":
+				if spacial_state == "blocked":
 				        GPIO.output(BuzzPin, GPIO.HIGH)
 			                screaming_state = True		                        	
 					stress = 3
@@ -99,7 +99,7 @@ def screaming_robot(state=state):
 					time.sleep(4)
 		                        GPIO.output(BuzzPin, GPIO.LOW)
 					check_spacial()	
-					if spacial_state = "blocked":
+					if spacial_state == "blocked":
 						stress = 4
 						GPIO.output(BuzzPin, GPIO.HIGH)
 						screaming_state = True
@@ -122,7 +122,7 @@ def screaming_robot(state=state):
                     #SCREAM for 10 seconds
 
 def check_spacial(spacial_state=spacial_state):
-	if GPIO.input(vibePin) = False:
+	if GPIO.input(vibePin) == False:
 		spacial_state = "free"
 		fwd()
 		stress = 0
@@ -166,7 +166,7 @@ def check_sound(Sound_state=sound_state):
 		sound_state = "quiet"	
 
 def check_overall(overall_state= overall_state):
-	if spacial_state = "free" and light_state = "light" and sound_state = "quiet":
+	if spacial_state == "free" and light_state == "light" and sound_state == "quiet":
 		print "I have a bad feeling about this"
 		GPIO.output(BuzzPin, GPIO.LOW)
 		screaming_state = False
