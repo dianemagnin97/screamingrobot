@@ -43,7 +43,6 @@ stress = 0
 
 #set to shut off after 3 minutes
 timer = "off"
-Timer.cancel()
 t = Timer(180, end)
 t.start()
 timer = "on"
@@ -64,6 +63,10 @@ def screaming_robot(state=state):
 		check_spacial()
 		#if blocked
 		if spacial_state = "blocked":
+			GPIO.output(BuzzPin, GPIO.HIGH)
+			screaming_state = True
+		        time.sleep(1)
+		        GPIO.output(BuzzPin, GPIO.LOW)
 			stress = 1
 			rot_timer = "on"
 			rot_t.start()
@@ -73,6 +76,10 @@ def screaming_robot(state=state):
 				#check if blocked again	
 			check_spacial()
 			if spacial_state = "blocked":
+			        GPIO.output(BuzzPin, GPIO.HIGH)
+			        screaming_state = True
+		                time.sleep(2)
+		                GPIO.output(BuzzPin, GPIO.LOW)			
 				stress = 2
 				rot_timer = "on"
 				rot_t.start()
@@ -81,6 +88,10 @@ def screaming_robot(state=state):
 					right_rot()
 				check_spacial()	
 				if spacial_state = "blocked":
+				        GPIO.output(BuzzPin, GPIO.HIGH)
+			                screaming_state = True
+		                        time.sleep(4)
+		                        GPIO.output(BuzzPin, GPIO.LOW)	
 					stress = 3
 					rot_timer = "on"
 					rot_t.start()
