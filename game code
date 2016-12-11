@@ -66,39 +66,39 @@ def screaming_robot(state=state):
 			print "I'm blocked! AAAAAAAAAHHHHHH!"
 			GPIO.output(BuzzPin, GPIO.HIGH)
 			screaming_state = True
-		        time.sleep(1)
-		        GPIO.output(BuzzPin, GPIO.LOW)
 			stress = 1
 			rot_timer = "on"
 			rot_t.start()
 			#rotate for 2 seconds
 			while rot_timer == "on":
-				right_rot()		
-				#check if blocked again	
+				right_rot()							
+		        time.sleep(1)
+		        GPIO.output(BuzzPin, GPIO.LOW)
+			#check if blocked again
 			check_spacial()
 			if spacial_state = "blocked":
 			        GPIO.output(BuzzPin, GPIO.HIGH)
-			        screaming_state = True
-		                time.sleep(2)
-		                GPIO.output(BuzzPin, GPIO.LOW)			
+			        screaming_state = True		
 				stress = 2
 				rot_timer = "on"
 				rot_t.start()
 			#rotate for 2 seconds
 				while rot_timer == "on":
 					right_rot()
+		                time.sleep(2)
+		                GPIO.output(BuzzPin, GPIO.LOW)	
 				check_spacial()	
 				if spacial_state = "blocked":
 				        GPIO.output(BuzzPin, GPIO.HIGH)
-			                screaming_state = True
-		                        time.sleep(4)
-		                        GPIO.output(BuzzPin, GPIO.LOW)	
+			                screaming_state = True		                        	
 					stress = 3
 					rot_timer = "on"
 					rot_t.start()
 			#rotate for 2 seconds
 					while rot_timer == "on":
 						right_rot()
+					time.sleep(4)
+		                        GPIO.output(BuzzPin, GPIO.LOW)
 					check_spacial()	
 					if spacial_state = "blocked":
 						stress = 4
